@@ -1,0 +1,8 @@
+/* Local fonts */
+@import url('./css/Montserrat-font.css');
+/* Keep Clash Grotesk available if you want to compare or fallback */
+/* @import url('./css/clash-grotesk.css'); */
+/* Optional fallback system font stack or Inter can be added if wanted */
+
+/* Purged default Vite scaffold styles to prevent body flex centering that caused left offset.
+  All global layout/typography now lives in App.css */
