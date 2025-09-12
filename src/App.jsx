@@ -5,6 +5,7 @@ import "./App.css"; // restore design system styles
 import SimpleNav from "./SimpleNav.jsx";
 import TerminalAbout from "./components/TerminalAbout.jsx";
 import LogoLoop from "./components/LogoLoop.jsx";
+import ScrollFloat from "./components/ScrollFloat.jsx";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import aiMarketingLottie from "./assets/Blogging Black & White.lottie?url";
 import {
@@ -193,9 +194,9 @@ function App() {
         <div className="container hero-content">
           <BlurText
             text="Mohamed Niyaz | Software Engineer"
-            delay={120}
+            delay={200}
             animateBy="words"
-            direction="top"
+            direction="bottom"
             onAnimationComplete={() => {
               /* no-op for now */
             }}
@@ -203,7 +204,7 @@ function App() {
             as="h1"
             style={{
               fontSize: "clamp(2.6rem,4vw,3.2rem)",
-              fontWeight: 700,
+              fontWeight: 550,
               margin: "0 0 1rem",
               color: "var(--color-text)",
             }}
@@ -242,7 +243,17 @@ function App() {
       <section id="about" ref={aboutRef} className="container section-full">
         <div className="about-grid">
           <div>
-            <h2 style={{ marginTop: 0 }}>About Me</h2>
+            <ScrollFloat
+              as="h2"
+              containerClassName=""
+              textClassName=""
+              scrollStart="top bottom"
+              scrub={false}
+              once={true}
+              toggleActions="play none none none"
+            >
+              About Me
+            </ScrollFloat>
             <div className="about-animation">
               {showAboutAnim && (
                 <DotLottieReact
@@ -268,12 +279,22 @@ function App() {
 
       {/* Skills - full screen cards grid */}
       <section id="skills" className="container section-full">
-        <h2
+        <div
           className="text-center"
           style={{ marginTop: 0, marginBottom: "2rem" }}
         >
-          My Technical Skills
-        </h2>
+          <ScrollFloat
+            as="h2"
+            scrollStart="top bottom"
+            scrub={false}
+            once={true}
+            toggleActions="play none none none"
+            animationDuration={0.7}
+            stagger={0.06}
+          >
+            My Technical Skills
+          </ScrollFloat>
+        </div>
         <div className="skills-grid">
           {skills.map(({ name, Icon, color }, idx) => (
             <div key={idx} className="skill-card">
@@ -302,12 +323,22 @@ function App() {
 
       {/* Projects */}
       <section id="projects" className="section container">
-        <h2
+        <div
           className="text-center"
           style={{ marginTop: 0, marginBottom: "2.2rem" }}
         >
-          Featured Projects
-        </h2>
+          <ScrollFloat
+            as="h2"
+            scrollStart="top bottom"
+            scrub={false}
+            once={true}
+            toggleActions="play none none none"
+            animationDuration={0.7}
+            stagger={0.06}
+          >
+            Featured Projects
+          </ScrollFloat>
+        </div>
         <div className="projects-grid">
           {projects.map((proj, idx) => (
             <div
@@ -398,7 +429,19 @@ function App() {
       {/* Contact */}
       <section id="contact" className="section section-alt">
         <div className="container text-center">
-          <h2 style={{ marginTop: 0, marginBottom: "1.2rem" }}>Get In Touch</h2>
+          <div style={{ marginTop: 0, marginBottom: "1.2rem" }}>
+            <ScrollFloat
+              as="h2"
+              scrollStart="top bottom"
+              scrub={false}
+              once={true}
+              toggleActions="play none none none"
+              animationDuration={0.7}
+              stagger={0.06}
+            >
+              Get In Touch
+            </ScrollFloat>
+          </div>
           <p style={{ maxWidth: 760, margin: "0 auto 1.5rem" }}>
             I'm currently seeking new opportunities. Feel free to reach out via
             email or connect with me on LinkedIn.

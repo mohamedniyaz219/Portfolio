@@ -42,11 +42,15 @@ export default function BlurText({
           <span
             key={i}
             className="blur-segment"
-            style={{ animationDelay: `${i * delay}ms` }}
+            style={{
+              animationDelay: `${i * delay}ms`,
+              ...(animateBy === "words" && !isLast
+                ? { marginRight: "0.35em" }
+                : null),
+            }}
             onAnimationEnd={isLast ? onAnimationComplete : undefined}
           >
             {content}
-            {animateBy === "words" && !isLast ? " " : null}
           </span>
         );
       })}
