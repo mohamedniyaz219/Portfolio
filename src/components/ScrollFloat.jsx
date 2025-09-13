@@ -43,18 +43,21 @@ const ScrollFloat = ({
 
     const charElements = el.querySelectorAll(".inline-block");
 
-    const ctx = gsap.context(() => {
-      const stConfig = {
-        trigger: el,
-        scroller,
-        start: scrollStart,
-        once,
-        toggleActions,
-      };
-      if (scrub) {
-        stConfig.scrub = true;
-        stConfig.end = scrollEnd;
-      }
+    const stBase = {
+      trigger: el,
+      scroller,
+      start: scrollStart,
+      once,
+      toggleActions,
+    };
+    if (scrub) {
+      stBase.scrub = true;
+      stBase.end = scrollEnd;
+    }
+
+    const mm = gsap.matchMedia();
+
+    const build = (dur, stag) =>
       gsap.fromTo(
         charElements,
         {
@@ -66,19 +69,28 @@ const ScrollFloat = ({
           transformOrigin: "50% 0%",
         },
         {
-          duration: animationDuration,
+          duration: dur,
           ease,
           opacity: 1,
           yPercent: 0,
           scaleY: 1,
           scaleX: 1,
-          stagger,
-          scrollTrigger: stConfig,
+          stagger: stag,
+          scrollTrigger: stBase,
         }
       );
-    }, el);
 
-    return () => ctx.revert();
+    // Under 640px: shorter duration and stagger for tighter pacing
+    mm.add("(max-width: 640px)", () => {
+      const dur = Math.max(0.5, animationDuration * 0.85);
+      const stag = Math.max(0.02, stagger * 0.8);
+      return build(dur, stag);
+    });
+
+    // 641px and up: use provided values
+    mm.add("(min-width: 641px)", () => build(animationDuration, stagger));
+
+    return () => mm.revert();
   }, [
     scrollContainerRef,
     animationDuration,
@@ -86,6 +98,9 @@ const ScrollFloat = ({
     scrollStart,
     scrollEnd,
     stagger,
+    scrub,
+    once,
+    toggleActions,
   ]);
 
   return (

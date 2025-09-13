@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import BlurText from "./BlurText";
+import TypewriterText from "./components/TypewriterText.jsx";
 import Spline from "@splinetool/react-spline";
 import "./App.css"; // restore design system styles
 import SimpleNav from "./SimpleNav.jsx";
 import TerminalAbout from "./components/TerminalAbout.jsx";
 import LogoLoop from "./components/LogoLoop.jsx";
 import ScrollFloat from "./components/ScrollFloat.jsx";
+import InteractiveHoverButton from "./components/InteractiveHoverButton.jsx";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import aiMarketingLottie from "./assets/Blogging Black & White.lottie?url";
 import {
@@ -52,11 +54,11 @@ const navItems = [
 
 const projects = [
   {
-    title: "Project Title 1",
-    desc: "A brief 1-2 sentence description of the project, its purpose, and the problem it solves.",
-    tags: ["React", "Node.js"],
-    demo: "#",
-    code: "#",
+    title: "SpaceDive",
+    desc: "This is a frontend project which fetches real time data of position of asteroids using NASA public API and displays them in a 3D visualization and their relative positon from the planets.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    demo: "https://spacedive-60033339891.development.catalystserverless.in/app/index.html",
+    code: "https://github.com/mohamedniyaz219/Nasa-Space-apps-Challenge.git",
   },
   {
     title: "Project Title 2",
@@ -193,7 +195,7 @@ function App() {
         </header>
         <div className="container hero-content">
           <BlurText
-            text="Mohamed Niyaz | Software Engineer"
+            text="Mohamed Niyaz"
             delay={200}
             animateBy="words"
             direction="bottom"
@@ -209,17 +211,20 @@ function App() {
               color: "var(--color-text)",
             }}
           />
-          <p
+          <TypewriterText
+            text="A final-year Software Engineering student passionate about building scalable web applications and solving complex problems."
+            speed={28}
+            startDelay={650}
+            as="p"
+            className=""
             style={{
               fontSize: "1.15rem",
               color: "var(--color-text-soft)",
               maxWidth: 820,
               margin: "0 auto 2rem",
             }}
-          >
-            A final-year Software Engineering student passionate about building
-            scalable web applications and solving complex problems.
-          </p>
+            ariaLabel="Intro summary typed text"
+          />
           <div
             style={{
               display: "flex",
@@ -229,12 +234,16 @@ function App() {
               marginTop: "0.5rem",
             }}
           >
-            <a href="#projects" className="btn btn-primary">
+            <InteractiveHoverButton href="#projects" variant="primary">
               View My Projects
-            </a>
-            <a href="/resume.pdf" download className="btn btn-outline">
+            </InteractiveHoverButton>
+            <InteractiveHoverButton
+              href="/resume.pdf"
+              variant="outline"
+              download
+            >
               Download Resume
-            </a>
+            </InteractiveHoverButton>
           </div>
         </div>
       </section>
