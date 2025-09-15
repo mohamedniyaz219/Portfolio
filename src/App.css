@@ -65,7 +65,24 @@ img { max-width: 100%; display: block; }
 .tag { background: var(--color-text); color:#000; border-radius: var(--radius-sm); padding: .25em .7em; font-size:.8rem; font-weight:500; }
 
 /* Grid */
-.projects-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; }
+.projects-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:.9rem; }
+
+/* Project card */
+.project-card { background: var(--color-surface); border: 1px solid #262626; border-radius: 12px; box-shadow: var(--shadow-md); padding: .8rem; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: .5rem; max-height: 360px; }
+.project-media { width: 100%; aspect-ratio: 4/3; background: var(--color-surface-alt); border: 1px solid #262626; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--color-text); font-size: 1.2rem; overflow: hidden; }
+.project-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-title { font-size: .95rem; font-weight: 700; margin: .15rem 0 .05rem; }
+.project-desc { color: var(--color-text-soft); font-size: .9rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.project-tags { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .15rem; }
+.project-actions { display: flex; gap: .8rem; align-items: center; margin-top: auto; font-size: .9rem; }
+
+/* Tag pill fix */
+.tag { display: inline-flex; align-items: center; justify-content: center; padding: .2em .55em; line-height: 1; border-radius: 9999px; font-size: .75rem; }
+
+@media (max-width: 680px) {
+  .project-title { font-size: .98rem; }
+  .project-desc { font-size: .9rem; }
+}
 
 /* Contact inline items */
 .inline-list { display:flex; gap:2rem; align-items:center; justify-content:center; flex-wrap:wrap; color: var(--color-text-soft); }
@@ -193,6 +210,35 @@ html { scroll-behavior: smooth; }
   100% { filter: blur(0); opacity: 1; transform: none; }
 }
 
+/* Certifications */
+.certs-section { padding: 3.5rem 0; }
+.certs-lead { color: var(--color-text-soft); max-width: 880px; margin: .5rem auto 2rem; text-align: center; }
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+
+/* Flip card */
+.cert-card { perspective: 1000px; background: transparent; border-radius: 14px; position: relative; height: 360px; isolation: isolate; }
+.cert-card:focus { outline: none; }
+.cert-card:hover, .cert-card:focus-visible { z-index: 2; }
+.cert-card__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 500ms ease; transform-origin: center center; will-change: transform; }
+.cert-card:hover .cert-card__inner, .cert-card:focus-visible .cert-card__inner { transform: rotateY(180deg); }
+
+.cert-card__face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--color-surface); border: 1px solid #262626; border-radius: 14px; box-shadow: var(--shadow-md); padding: 1rem; display: flex; flex-direction: column; gap: .75rem; overflow: hidden; }
+.cert-card__back { transform: rotateY(180deg); }
+
+.cert-media { width: 100%; aspect-ratio: 16/9; background: var(--color-surface-alt); border: 1px solid #262626; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cert-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cert-media__ph { color: var(--color-text); opacity: .8; font-size: 1.2rem; }
+
+.cert-meta { display: flex; flex-direction: column; gap: .25rem; margin-top: .25rem; }
+.cert-title { font-weight: 800; letter-spacing: .2px; }
+.cert-issuer { color: #76a7ff; font-weight: 600; }
+.cert-year { color: var(--color-text-soft); font-size: .9rem; }
+
+.cert-back__content { display: flex; flex-direction: column; gap: .5rem; height: 100%; }
+.cert-details { margin: .25rem 0 .5rem; padding-left: 1.1rem; }
+.cert-details li { margin: .15rem 0; color: var(--color-text-soft); }
+
+
 /* Interactive Hover Button */
 .ihb {
   --x: 50%;
@@ -266,4 +312,49 @@ html { scroll-behavior: smooth; }
 }
 .tw-caret--done { animation: tw-blink 1.6s steps(2, start) infinite; }
 @keyframes tw-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* --- Minimal animate.css subset for fadeInUp --- */
+.animate__animated {
+  --animate-duration: 0.85s;
+  --animate-delay: 0s;
+  animation-duration: var(--animate-duration);
+  animation-fill-mode: both;
+  animation-delay: var(--animate-delay);
+}
+
+@keyframes animate__fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate__fadeInUp {
+  animation-name: animate__fadeInUp;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate__animated {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Pre-animate: hidden state before entering viewport to avoid flicker */
+.pre-animate {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pre-animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 

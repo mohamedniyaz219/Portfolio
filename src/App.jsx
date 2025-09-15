@@ -8,8 +8,12 @@ import TerminalAbout from "./components/TerminalAbout.jsx";
 import LogoLoop from "./components/LogoLoop.jsx";
 import ScrollFloat from "./components/ScrollFloat.jsx";
 import InteractiveHoverButton from "./components/InteractiveHoverButton.jsx";
+import CertificateCard from "./components/CertificateCard.jsx";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import aiMarketingLottie from "./assets/Blogging Black & White.lottie?url";
+import FadeInUp from "./components/FadeInUp.jsx";
+// Removed import for spacediveImg
+
 import {
   FaGithub,
   FaLinkedin,
@@ -55,22 +59,23 @@ const navItems = [
 const projects = [
   {
     title: "SpaceDive",
-    desc: "This is a frontend project which fetches real time data of position of asteroids using NASA public API and displays them in a 3D visualization and their relative positon from the planets.",
+    desc: "Frontend project which fetches real time data of position of asteroids using NASA public API and displays them in a 3D visualization and their relative positon.",
     tags: ["HTML", "CSS", "JavaScript"],
     demo: "https://spacedive-60033339891.development.catalystserverless.in/app/index.html",
     code: "https://github.com/mohamedniyaz219/Nasa-Space-apps-Challenge.git",
+    image: `${import.meta.env.BASE_URL}spacedive.png`,
   },
   {
-    title: "Project Title 2",
-    desc: "A brief 1-2 sentence description of the project, its purpose, and the problem it solves.",
-    tags: ["Python", "Django"],
-    demo: "#",
-    code: "#",
+    title: "Thozhilali",
+    desc: "A one stop solution to connect technical workers to users.",
+    tags: ["HTML", "CSS"],
+    demo: "https://www.thozhilali.in/",
+    image: `${import.meta.env.BASE_URL}thozhilali.png`,
   },
   {
-    title: "Project Title 3",
+    title: "SnapTap",
     desc: "A brief 1-2 sentence description of the project, its purpose, and the problem it solves.",
-    tags: ["Java", "Express"],
+    tags: ["React", "Express", "Node.js", "PostgreSQL", "Python"],
     demo: "#",
     code: "#",
   },
@@ -103,6 +108,33 @@ function App() {
     { name: "Unity", Icon: SiUnity, color: "#FFFFFF" },
     { name: "Hugging Face", Icon: SiHuggingface, color: "#FF9D00" },
     { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+  ];
+
+  const certifications = [
+    {
+      title: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services",
+      year: "2024",
+      image: "",
+      details: ["Cloud fundamentals", "AWS services", "Billing & Pricing"],
+      link: "#",
+    },
+    {
+      title: "Python for Everybody Specialization",
+      issuer: "University of Michigan",
+      year: "2025",
+      image: "",
+      details: ["Python Programming", "Data Structures"],
+      link: "#",
+    },
+    {
+      title: "Meta Frontend Developer Professional Certificate",
+      issuer: "Meta",
+      year: "2024",
+      image: "",
+      details: ["HTML/CSS/JS", "React"],
+      link: "#",
+    },
   ];
 
   // Use ALL skills in the logo loop
@@ -254,7 +286,7 @@ function App() {
           <div>
             <ScrollFloat
               as="h2"
-              containerClassName=""
+              containerClassName="animate__animated animate__fadeInUp"
               textClassName=""
               scrollStart="top bottom"
               scrub={false}
@@ -263,7 +295,7 @@ function App() {
             >
               About Me
             </ScrollFloat>
-            <div className="about-animation">
+            <FadeInUp as="div" className="about-animation" delay={120}>
               {showAboutAnim && (
                 <DotLottieReact
                   src={aiMarketingLottie}
@@ -272,9 +304,9 @@ function App() {
                   style={{ width: "min(520px, 90vw)" }}
                 />
               )}
-            </div>
+            </FadeInUp>
           </div>
-          <div>
+          <FadeInUp as="div" delay={240}>
             {showAboutAnim && (
               <TerminalAbout
                 lines={[
@@ -282,14 +314,14 @@ function App() {
                 ]}
               />
             )}
-          </div>
+          </FadeInUp>
         </div>
       </section>
 
       {/* Skills - full screen cards grid */}
       <section id="skills" className="container section-full">
         <div
-          className="text-center"
+          className="text-center animate__animated animate__fadeInUp"
           style={{ marginTop: 0, marginBottom: "2rem" }}
         >
           <ScrollFloat
@@ -306,15 +338,20 @@ function App() {
         </div>
         <div className="skills-grid">
           {skills.map(({ name, Icon, color }, idx) => (
-            <div key={idx} className="skill-card">
+            <FadeInUp
+              key={idx}
+              as="div"
+              className="skill-card"
+              delay={idx * 40}
+            >
               <div className="skill-icon" style={{ color }}>
                 <Icon size={28} />
               </div>
               <div className="skill-name">{name.toUpperCase()}</div>
-            </div>
+            </FadeInUp>
           ))}
         </div>
-        <div className="skills-loop">
+        <FadeInUp as="div" className="skills-loop" delay={220}>
           <LogoLoop
             logos={loopLogos}
             speed={120}
@@ -327,13 +364,13 @@ function App() {
             fadeOutColor="var(--color-bg)"
             ariaLabel="Technology logos"
           />
-        </div>
+        </FadeInUp>
       </section>
 
       {/* Projects */}
       <section id="projects" className="section container">
         <div
-          className="text-center"
+          className="text-center animate__animated animate__fadeInUp"
           style={{ marginTop: 0, marginBottom: "2.2rem" }}
         >
           <ScrollFloat
@@ -350,88 +387,108 @@ function App() {
         </div>
         <div className="projects-grid">
           {projects.map((proj, idx) => (
-            <div
+            <FadeInUp
               key={idx}
-              className="card-surface"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "1rem",
-              }}
+              as="div"
+              className="project-card"
+              delay={idx * 80}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: 140,
-                  background: "var(--color-surface-alt)",
-                  border: "1px solid #262626",
-                  borderRadius: 8,
-                  marginBottom: "1rem",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "var(--color-text)",
-                  fontSize: "2rem",
-                }}
-              >
-                Image
+              <div className="project-media">
+                {proj.image ? (
+                  <img
+                    src={proj.image}
+                    alt={`${proj.title} screenshot`}
+                    loading="lazy"
+                    decoding="async"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        "https://placehold.co/640x480?text=No+Image";
+                      e.currentTarget.onerror = null;
+                    }}
+                  />
+                ) : (
+                  <span>Image</span>
+                )}
               </div>
-              <h3 style={{ fontSize: "1.25rem", fontWeight: 600 }}>
-                {proj.title}
-              </h3>
-              <p
-                style={{
-                  color: "var(--color-text-soft)",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                {proj.desc}
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  gap: ".5rem",
-                  flexWrap: "wrap",
-                  marginBottom: ".5rem",
-                }}
-              >
+              <h3 className="project-title">{proj.title}</h3>
+              <p className="project-desc">{proj.desc}</p>
+              <div className="project-tags">
                 {proj.tags.map((tag, i) => (
                   <span key={i} className="tag" style={{ fontSize: ".75rem" }}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: "1rem" }}>
-                <a
-                  href={proj.demo}
-                  target="_blank"
-                  rel="noopener"
-                  style={{
-                    fontWeight: 500,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: ".3em",
-                  }}
-                >
-                  Live Demo <FaExternalLinkAlt size={16} />
-                </a>
-                <a
-                  href={proj.code}
-                  target="_blank"
-                  rel="noopener"
-                  style={{
-                    fontWeight: 500,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: ".3em",
-                  }}
-                >
-                  View Code <FaCodeBranch size={16} />
-                </a>
+              <div className="project-actions">
+                {proj.demo && (
+                  <a
+                    href={proj.demo}
+                    target="_blank"
+                    rel="noopener"
+                    style={{
+                      fontWeight: 500,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: ".3em",
+                    }}
+                  >
+                    Live Demo <FaExternalLinkAlt size={16} />
+                  </a>
+                )}
+                {proj.code && (
+                  <a
+                    href={proj.code}
+                    target="_blank"
+                    rel="noopener"
+                    style={{
+                      fontWeight: 500,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: ".3em",
+                    }}
+                  >
+                    View Code <FaCodeBranch size={16} />
+                  </a>
+                )}
               </div>
-            </div>
+            </FadeInUp>
           ))}
+        </div>
+      </section>
+
+      {/* Certifications */}
+      <section id="certifications" className="section">
+        <div className="container text-center">
+          <ScrollFloat
+            as="h2"
+            scrollStart="top bottom"
+            scrub={false}
+            once={true}
+            toggleActions="play none none none"
+            animationDuration={0.7}
+            stagger={0.06}
+            containerClassName="animate__animated animate__fadeInUp"
+          >
+            My Certifications
+          </ScrollFloat>
+          <FadeInUp as="p" className="certs-lead" delay={120}>
+            Professional certifications that demonstrate my expertise and
+            commitment to continuous learning. Hover over each certificate to
+            see more details.
+          </FadeInUp>
+          <div className="certs-grid">
+            {certifications.map((c, idx) => (
+              <FadeInUp key={idx} as="div" delay={idx * 90}>
+                <CertificateCard {...c} />
+              </FadeInUp>
+            ))}
+          </div>
         </div>
       </section>
 
