@@ -15,6 +15,7 @@ import officeWorkLottie from "./assets/Office work.lottie?url";
 import FadeInUp from "./components/FadeInUp.jsx";
 import AnimatedList from "./components/AnimatedList.jsx";
 import ExperienceTerminal from "./components/ExperienceTerminal.jsx";
+import resumePdf from "./assets/Mohamed-Niyaz-A-Resume.pdf?url";
 // Removed import for spacediveImg
 
 import {
@@ -325,7 +326,60 @@ function App() {
   const closeExp = () => setOpenExpIdx(-1);
 
   useEffect(() => {
-    // Smooth scroll polyfill fallback could go here if needed
+    // Smooth scroll fallback for browsers without CSS scroll-behavior support
+    const supportsNative = "scrollBehavior" in document.documentElement.style;
+    if (supportsNative) return;
+
+    const root = document.documentElement;
+    const getOffsetTop = () => {
+      const cs = getComputedStyle(root);
+      const navH = parseFloat(cs.getPropertyValue("--nav-height")) || 0;
+      const navB = parseFloat(cs.getPropertyValue("--nav-border")) || 0;
+      return navH + navB;
+    };
+
+    const easeInOutCubic = (t) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const DURATION = 500; // ms
+
+    function smoothScrollTo(targetY) {
+      const prefersReduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) {
+        window.scrollTo(0, targetY);
+        return;
+      }
+      const startY = window.scrollY || window.pageYOffset;
+      const startTime = performance.now();
+      function step(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / DURATION);
+        const eased = easeInOutCubic(t);
+        window.scrollTo(0, startY + (targetY - startY) * eased);
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function onDocClick(e) {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+      const id = href.slice(1);
+      const el = id ? document.getElementById(id) : null;
+      if (!el) return;
+      e.preventDefault();
+      const y =
+        el.getBoundingClientRect().top + window.pageYOffset - getOffsetTop();
+      smoothScrollTo(y);
+      // update URL hash without causing an instant jump
+      history.replaceState(null, "", href);
+    }
+
+    document.addEventListener("click", onDocClick);
+    return () => document.removeEventListener("click", onDocClick);
   }, []);
 
   useEffect(() => {
@@ -453,9 +507,9 @@ function App() {
               View My Projects
             </InteractiveHoverButton>
             <InteractiveHoverButton
-              href="/resume.pdf"
+              href={resumePdf}
               variant="outline"
-              download
+              download="Mohamed-Niyaz-A-Resume.pdf"
             >
               Download Resume
             </InteractiveHoverButton>
