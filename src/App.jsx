@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import BlurText from "./BlurText";
 import TypewriterText from "./components/TypewriterText.jsx";
-import Spline from "@splinetool/react-spline";
+import Orb from "./components/Orb.jsx";
 import "./App.css"; // restore design system styles
 import SimpleNav from "./SimpleNav.jsx";
 import TerminalAbout from "./components/TerminalAbout.jsx";
@@ -74,7 +74,7 @@ const projects = [
   },
   {
     title: "SnapTap",
-    desc: "A brief 1-2 sentence description of the project, its purpose, and the problem it solves.",
+    desc: "A Multi-tenant RBAC application for institures, parents, students and merchants to spend smart within the campus.",
     tags: ["React", "Express", "Node.js", "PostgreSQL", "Python"],
     demo: "#",
     code: "#",
@@ -173,12 +173,14 @@ function App() {
 
       {/* Social Links moved inside hero */}
 
-      {/* Hero with Spline background */}
+      {/* Hero with Orb (OGL) background */}
       <section id="hero" className="hero-section text-center">
         <div className="spline-bg" aria-hidden="true">
-          <Spline
-            style={{ width: "100%", height: "100%" }}
-            scene="https://prod.spline.design/Rk-qRkLaLJRo49DY/scene.splinecode"
+          <Orb
+            hue={75}
+            hoverIntensity={0.22}
+            rotateOnHover={true}
+            forceHoverState={false}
           />
         </div>
         <header
