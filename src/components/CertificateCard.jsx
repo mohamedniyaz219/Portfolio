@@ -48,7 +48,7 @@ export default function CertificateCard({
                 href={link}
                 target="_blank"
                 rel="noopener"
-                className="ihb ihb--primary"
+                className="ihb ihb--outline"
                 style={{ marginTop: "auto" }}
               >
                 <span className="ihb-label">View Certificate</span>

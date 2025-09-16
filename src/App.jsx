@@ -11,7 +11,10 @@ import InteractiveHoverButton from "./components/InteractiveHoverButton.jsx";
 import CertificateCard from "./components/CertificateCard.jsx";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import aiMarketingLottie from "./assets/Blogging Black & White.lottie?url";
+import officeWorkLottie from "./assets/Office work.lottie?url";
 import FadeInUp from "./components/FadeInUp.jsx";
+import AnimatedList from "./components/AnimatedList.jsx";
+import ExperienceTerminal from "./components/ExperienceTerminal.jsx";
 // Removed import for spacediveImg
 
 import {
@@ -47,6 +50,49 @@ import {
   SiTypescript,
 } from "react-icons/si";
 
+// Map project tag strings to icons (and optional brand colors)
+const tagIconMap = {
+  HTML: SiHtml5,
+  CSS: SiCss3,
+  JavaScript: SiJavascript,
+  TypeScript: SiTypescript,
+  React: SiReact,
+  "Next.js": SiNextdotjs,
+  "Node.js": SiNodedotjs,
+  Node: SiNodedotjs,
+  Express: SiExpress,
+  "Express.js": SiExpress,
+  PostgreSQL: SiPostgresql,
+  MySQL: SiMysql,
+  MongoDB: SiMongodb,
+  Firebase: SiFirebase,
+  Python: SiPython,
+  Docker: SiDocker,
+  AWS: FaAws,
+  Java: FaJava,
+};
+
+const tagColorMap = {
+  HTML: "#E34F26",
+  CSS: "#1572B6",
+  JavaScript: "#F7DF1E",
+  TypeScript: "#3178C6",
+  React: "#61DAFB",
+  "Next.js": "#FFFFFF",
+  "Node.js": "#339933",
+  Node: "#339933",
+  Express: "#FFFFFF",
+  "Express.js": "#FFFFFF",
+  PostgreSQL: "#336791",
+  MySQL: "#4479A1",
+  MongoDB: "#47A248",
+  Firebase: "#FFCA28",
+  Python: "#3776AB",
+  Docker: "#2496ED",
+  AWS: "#FF9900",
+  Java: "#007396",
+};
+
 // Data
 const navItems = [
   { label: "Home", href: "#hero" },
@@ -78,6 +124,7 @@ const projects = [
     tags: ["React", "Express", "Node.js", "PostgreSQL", "Python"],
     demo: "#",
     code: "#",
+    image: `${import.meta.env.BASE_URL}snaptap.jpeg`,
   },
 ];
 
@@ -88,6 +135,9 @@ function App() {
   const aboutRef = useRef(null);
 
   const skills = [
+    // Custom logo component for LottieFiles (uses Simple Icons CDN)
+    // Placed here to keep component local without extra files
+
     { name: "HTML", Icon: SiHtml5, color: "#E34F26" },
     { name: "CSS", Icon: SiCss3, color: "#1572B6" },
     { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
@@ -108,32 +158,141 @@ function App() {
     { name: "Unity", Icon: SiUnity, color: "#FFFFFF" },
     { name: "Hugging Face", Icon: SiHuggingface, color: "#FF9D00" },
     { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+    {
+      name: "LottieFiles",
+      Icon: ({ size = 28 }) => (
+        <img
+          src="https://cdn.simpleicons.org/lottiefiles/00DDB3"
+          alt="LottieFiles"
+          width={size}
+          height={size}
+          style={{ display: "block" }}
+        />
+      ),
+      color: "#00DDB3",
+    },
   ];
 
   const certifications = [
     {
-      title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services",
+      title: "Galactic Problem Solver",
+      issuer: "NASA SpaceApps",
       year: "2024",
-      image: "",
-      details: ["Cloud fundamentals", "AWS services", "Billing & Pricing"],
-      link: "#",
+      image: `${import.meta.env.BASE_URL}galactic.png`,
+      details: [
+        "NASA API Integration",
+        "Three JS",
+        "HTML/CSS/JS",
+        "International Hackathon",
+        "Adressing Real-world Problems",
+      ],
+      link: "https://drive.google.com/file/d/1qdvhulItg3UPZxKraBcD-2S_59p-W-w0/view",
     },
     {
-      title: "Python for Everybody Specialization",
-      issuer: "University of Michigan",
+      title: "Journey to Cloud: Envisioning Your Solution",
+      issuer: "IBM SkillsBuild",
+      year: "2024",
+      image: `${import.meta.env.BASE_URL}ibm.png`,
+      details: [
+        "Cloud Computing",
+        "IBM Code Engine",
+        "IaaS",
+        "Microservices",
+        "Enterprise Design Thinking",
+        "SaaS",
+        "PaaS",
+      ],
+      link: "https://www.credly.com/badges/10caeaa0-cbbc-47d5-bf3d-3f052c125cbe/public_url",
+    },
+    {
+      title: "AWS Knowledge: Cloud Essentials",
+      issuer: "Amazon Web Services Training and Certification",
+      year: "2024",
+      image: `${import.meta.env.BASE_URL}aws.png`,
+      details: [
+        "Amazon Web Services (AWS)",
+        "AWS Cloud",
+        "AWS Databases",
+        "AWS Compute",
+        "AWS Networking",
+        "AWS Security",
+      ],
+      link: "https://www.credly.com/badges/fbddd02d-f0ea-406e-aacb-fd3a5c035127/public_url",
+    },
+    {
+      title: "AWS Academy Graduate - AWS Academy Cloud Foundations",
+      issuer: "Amazon Web Services Training and Certification",
+      year: "2024",
+      image: `${import.meta.env.BASE_URL}aws1.png`,
+      details: [
+        "AWS Architecture",
+        "AWS Cloud",
+        "AWS Core Services",
+        "AWS Pricing",
+        "AWS Support",
+      ],
+      link: "https://www.credly.com/badges/24bcdd7e-3f65-4414-ba20-7e4d5b27131a/public_url",
+    },
+    {
+      title:
+        "Build Real World AI Applications with Gemini and Imagen Skill Badge",
+      issuer: "Google Cloud",
       year: "2025",
-      image: "",
-      details: ["Python Programming", "Data Structures"],
-      link: "#",
+      image: `${import.meta.env.BASE_URL}gc1.png`,
+      details: [
+        "Natural Language Processing (NLP)",
+        "AI/ML",
+        "Gemini",
+        "Imagen",
+        "Vertex AI",
+      ],
+      link: "https://www.credly.com/badges/43674da2-3545-4822-b833-813756fc7668/public_url",
     },
     {
-      title: "Meta Frontend Developer Professional Certificate",
-      issuer: "Meta",
-      year: "2024",
-      image: "",
-      details: ["HTML/CSS/JS", "React"],
-      link: "#",
+      title: "Explore Generative AI with the Vertex AI Gemini API Skill Badge",
+      issuer: "Google Cloud",
+      year: "2025",
+      image: `${import.meta.env.BASE_URL}gc2.png`,
+      details: ["Python", "Generative AI", "Gemini", "Vertex AI"],
+      link: "https://www.credly.com/badges/3753390d-a7a7-45f2-9807-b79148638d54/public_url",
+    },
+    {
+      title: "Prompt Design in Vertex AI Skill Badge",
+      issuer: "Google Cloud",
+      year: "2025",
+      image: `${import.meta.env.BASE_URL}gc3.png`,
+      details: [
+        "Artificial Intelligence (AI)",
+        "Generative AI",
+        "Gemini APIs",
+        "Prompt Engineering",
+      ],
+      link: "https://www.credly.com/badges/00b585dc-4f90-499a-add3-4a73c9967e76/public_url",
+    },
+    {
+      title: "Agentic AI Day CERTIFICATE OF PARTICIPATION",
+      issuer: "Google Cloud & Hack2skill",
+      year: "2025",
+      image: `${import.meta.env.BASE_URL}gc4.png`,
+      details: ["Artificial Intelligence (AI)", "Agentic AI", "AI Agents"],
+      link: "https://drive.google.com/file/d/14CIEBHMgJ2D-aWajQJ7qHASHRbcfk2N9/view",
+    },
+    {
+      title: "outstanding completion of ‘Unity’ (Semester 6) Hackathon finale",
+      issuer:
+        "Government of Tamil Nadu - Tamil Nadu Skill Development Corporation & E16 AI",
+      year: "2025",
+      image: `${import.meta.env.BASE_URL}nm.png`,
+      details: ["Unity", "AR applications", "AI Chatbots", "Hackathon"],
+      link: "https://drive.google.com/file/d/1pjnIz-Nyc2ayX5FYvor1qcZDvVf62Yps/view?usp=sharing",
+    },
+    {
+      title: "Artificially Intelligent Tools",
+      issuer: "Skill Nation",
+      year: "2025",
+      image: `${import.meta.env.BASE_URL}skn.png`,
+      details: ["AI Tools", "Context Engineering", "AI Tricks"],
+      link: "https://drive.google.com/file/d/1drVdHutuPZKb93Bt-aGXL1vwXwJtWkFi/view?usp=sharing",
     },
   ];
 
@@ -142,6 +301,28 @@ function App() {
     node: <Icon style={{ color }} />, // color preserved; size set by LogoLoop
     title: name,
   }));
+
+  // Experience items (structured like projects/certifications)
+  const experiences = [
+    {
+      company: "Ifelse Technologies",
+      duration: "July 2025 - September 2025",
+      role: "Full‑Stack Developer Intern with AI/ML integration",
+      description:
+        "Built multi-tenant RBAC Student Wallet System with React, Node.js/Express.js, and PostgreSQL; worked on Backend development and integrated Deepface Model for face verification.",
+    },
+    {
+      company: "Thozhilali",
+      duration: "2022",
+      role: "Startup Co-Founder & Web Developer",
+      description:
+        "Developed a online website which acts as a connecting bridge between job seeking technicians and the people in need of them.",
+    },
+  ];
+
+  const [openExpIdx, setOpenExpIdx] = useState(-1);
+  const openExp = (idx) => setOpenExpIdx(idx);
+  const closeExp = () => setOpenExpIdx(-1);
 
   useEffect(() => {
     // Smooth scroll polyfill fallback could go here if needed
@@ -353,21 +534,70 @@ function App() {
             </FadeInUp>
           ))}
         </div>
-        <FadeInUp as="div" className="skills-loop" delay={220}>
-          <LogoLoop
-            logos={loopLogos}
-            speed={120}
-            direction="left"
-            logoHeight={32}
-            gap={36}
-            pauseOnHover
-            scaleOnHover
-            fadeOut
-            fadeOutColor="var(--color-bg)"
-            ariaLabel="Technology logos"
-          />
-        </FadeInUp>
       </section>
+
+      {/* Professional Experience */}
+      <section id="experience" className="experience-section">
+        <div className="container">
+          <div
+            className="text-center animate__animated animate__fadeInUp"
+            style={{ marginTop: 0, marginBottom: "2rem" }}
+          >
+            <ScrollFloat
+              as="h2"
+              scrollStart="top bottom"
+              scrub={false}
+              once={true}
+              toggleActions="play none none none"
+              animationDuration={0.7}
+              stagger={0.06}
+            >
+              Professional Experience
+            </ScrollFloat>
+          </div>
+
+          <div className="experience-grid">
+            <FadeInUp as="div" delay={80}>
+              <div className="experience-panel">
+                <AnimatedList
+                  items={experiences.map(
+                    (e) => `${e.role} · ${e.company} · ${e.duration}`
+                  )}
+                  onItemSelect={(_, idx) => openExp(idx)}
+                />
+              </div>
+            </FadeInUp>
+
+            <FadeInUp as="div" delay={160}>
+              <div className="experience-lottie">
+                <DotLottieReact src={officeWorkLottie} loop autoplay />
+              </div>
+            </FadeInUp>
+          </div>
+
+          <FadeInUp as="div" className="skills-loop" delay={260}>
+            <LogoLoop
+              logos={loopLogos}
+              speed={120}
+              direction="left"
+              logoHeight={32}
+              gap={36}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor="var(--color-bg)"
+              ariaLabel="Technology logos"
+            />
+          </FadeInUp>
+        </div>
+      </section>
+
+      {/* Experience Terminal Modal */}
+      <ExperienceTerminal
+        open={openExpIdx >= 0}
+        onClose={closeExp}
+        exp={experiences[openExpIdx] || {}}
+      />
 
       {/* Projects */}
       <section id="projects" className="section container">
@@ -395,69 +625,92 @@ function App() {
               className="project-card"
               delay={idx * 80}
             >
-              <div className="project-media">
-                {proj.image ? (
-                  <img
-                    src={proj.image}
-                    alt={`${proj.title} screenshot`}
-                    loading="lazy"
-                    decoding="async"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        "https://placehold.co/640x480?text=No+Image";
-                      e.currentTarget.onerror = null;
-                    }}
-                  />
-                ) : (
-                  <span>Image</span>
-                )}
-              </div>
-              <h3 className="project-title">{proj.title}</h3>
-              <p className="project-desc">{proj.desc}</p>
-              <div className="project-tags">
-                {proj.tags.map((tag, i) => (
-                  <span key={i} className="tag" style={{ fontSize: ".75rem" }}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="project-actions">
-                {proj.demo && (
-                  <a
-                    href={proj.demo}
-                    target="_blank"
-                    rel="noopener"
-                    style={{
-                      fontWeight: 500,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".3em",
-                    }}
-                  >
-                    Live Demo <FaExternalLinkAlt size={16} />
-                  </a>
-                )}
-                {proj.code && (
-                  <a
-                    href={proj.code}
-                    target="_blank"
-                    rel="noopener"
-                    style={{
-                      fontWeight: 500,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".3em",
-                    }}
-                  >
-                    View Code <FaCodeBranch size={16} />
-                  </a>
-                )}
+              <div
+                className="project-card__inner"
+                tabIndex={0}
+                aria-label={`${proj.title} project card, flip for details`}
+              >
+                {/* FRONT */}
+                <div className="project-card__face project-card__front">
+                  <div className="project-media">
+                    {proj.image ? (
+                      <img
+                        src={proj.image}
+                        alt={`${proj.title} screenshot`}
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://placehold.co/640x480?text=No+Image";
+                          e.currentTarget.onerror = null;
+                        }}
+                      />
+                    ) : (
+                      <span>Image</span>
+                    )}
+                  </div>
+                  <h3 className="project-title">{proj.title}</h3>
+                  <div className="project-tags">
+                    {proj.tags.map((tag, i) => {
+                      const IconComp = tagIconMap[tag] || null;
+                      const brand = tagColorMap[tag];
+                      const iconColor = brand || undefined; // allow white logos to stay white
+                      return (
+                        <span key={i} className="tag tag--icon" title={tag}>
+                          {IconComp ? (
+                            <IconComp size={16} color={iconColor} />
+                          ) : (
+                            tag
+                          )}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* BACK */}
+                <div className="project-card__face project-card__back">
+                  <h3 className="project-title">{proj.title}</h3>
+                  <p className="project-desc">{proj.desc}</p>
+                  <div className="project-actions">
+                    {proj.demo && (
+                      <a
+                        href={proj.demo}
+                        target="_blank"
+                        rel="noopener"
+                        style={{
+                          fontWeight: 500,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: ".3em",
+                        }}
+                      >
+                        Live Demo <FaExternalLinkAlt size={16} />
+                      </a>
+                    )}
+                    {proj.code && (
+                      <a
+                        href={proj.code}
+                        target="_blank"
+                        rel="noopener"
+                        style={{
+                          fontWeight: 500,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: ".3em",
+                        }}
+                      >
+                        View Code <FaCodeBranch size={16} />
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </FadeInUp>
           ))}
