@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion as Motion, useInView } from "framer-motion";
 
 const AnimatedItem = ({
   children,
@@ -11,7 +11,7 @@ const AnimatedItem = ({
   const ref = useRef(null);
   const inView = useInView(ref, { amount: 0.5, triggerOnce: false });
   return (
-    <motion.div
+    <Motion.div
       ref={ref}
       data-index={index}
       onMouseEnter={onMouseEnter}
@@ -22,7 +22,7 @@ const AnimatedItem = ({
       className="al-item"
     >
       {children}
-    </motion.div>
+    </Motion.div>
   );
 };
 
@@ -67,28 +67,26 @@ export default function AnimatedList({
     );
   };
 
-  useEffect(() => {
+  const onKeyDown = (e) => {
     if (!enableArrowNavigation) return;
-    const handleKeyDown = (e) => {
-      if (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey)) {
-        e.preventDefault();
-        setKeyboardNav(true);
-        setSelectedIndex((prev) => Math.min(prev + 1, items.length - 1));
-      } else if (e.key === "ArrowUp" || (e.key === "Tab" && e.shiftKey)) {
-        e.preventDefault();
-        setKeyboardNav(true);
-        setSelectedIndex((prev) => Math.max(prev - 1, 0));
-      } else if (e.key === "Enter") {
-        if (selectedIndex >= 0 && selectedIndex < items.length) {
-          e.preventDefault();
-          onItemSelect?.(items[selectedIndex], selectedIndex);
-        }
-      }
-    };
+    const tag = e.target?.tagName ?? "";
+    if (/INPUT|TEXTAREA|SELECT|BUTTON/.test(tag)) return;
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [items, selectedIndex, onItemSelect, enableArrowNavigation]);
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setKeyboardNav(true);
+      setSelectedIndex((prev) => Math.min(prev + 1, items.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setKeyboardNav(true);
+      setSelectedIndex((prev) => Math.max(prev - 1, 0));
+    } else if (e.key === "Enter") {
+      if (selectedIndex >= 0 && selectedIndex < items.length) {
+        e.preventDefault();
+        onItemSelect?.(items[selectedIndex], selectedIndex);
+      }
+    }
+  };
 
   useEffect(() => {
     if (!keyboardNav || selectedIndex < 0 || !listRef.current) return;
@@ -118,7 +116,12 @@ export default function AnimatedList({
   }, [selectedIndex, keyboardNav]);
 
   return (
-    <div className={`al-root ${className}`.trim()}>
+    <div
+      className={`al-root ${className}`.trim()}
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      aria-label="Experience list. Use Arrow keys to navigate and Enter to open."
+    >
       <div
         ref={listRef}
         className={`al-list ${

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, createElement } from "react";
 
 export default function TypewriterText({
   text = "",
-  speed = 35, // ms per character
-  startDelay = 400, // initial delay before typing
+  speed = 35,
+  startDelay = 400,
   className = "",
-  as: Tag = "p",
+  as: asTag = "p",
   showCaret = true,
   onComplete,
   ariaLabel,
@@ -16,7 +16,6 @@ export default function TypewriterText({
   const indexRef = useRef(0);
 
   useEffect(() => {
-    // Respect reduced-motion preferences
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     const noAnim = mql.matches || speed <= 0;
 
@@ -48,17 +47,19 @@ export default function TypewriterText({
     };
   }, [text, speed, startDelay, onComplete]);
 
-  return (
-    <Tag className={className} aria-label={ariaLabel} style={style}>
-      <span>{output}</span>
-      {showCaret && (
-        <span
-          className={`tw-caret ${done ? "tw-caret--done" : ""}`}
-          aria-hidden="true"
-        >
-          |
-        </span>
-      )}
-    </Tag>
+  return createElement(
+    asTag,
+    { className, "aria-label": ariaLabel, style },
+    createElement("span", null, output),
+    showCaret
+      ? createElement(
+          "span",
+          {
+            className: `tw-caret ${done ? "tw-caret--done" : ""}`,
+            "aria-hidden": "true",
+          },
+          "|"
+        )
+      : null
   );
 }

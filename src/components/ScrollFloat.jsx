@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, createElement } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -19,7 +19,7 @@ const ScrollFloat = ({
   scrub = false,
   once = true,
   toggleActions = "play none none none",
-  as: Tag = "h2",
+  as: asTag = "h2",
 }) => {
   const containerRef = useRef(null);
 
@@ -80,14 +80,12 @@ const ScrollFloat = ({
         }
       );
 
-    // Under 640px: shorter duration and stagger for tighter pacing
     mm.add("(max-width: 640px)", () => {
       const dur = Math.max(0.5, animationDuration * 0.85);
       const stag = Math.max(0.02, stagger * 0.8);
       return build(dur, stag);
     });
 
-    // 641px and up: use provided values
     mm.add("(min-width: 641px)", () => build(animationDuration, stagger));
 
     return () => mm.revert();
@@ -103,23 +101,25 @@ const ScrollFloat = ({
     toggleActions,
   ]);
 
-  return (
-    <Tag
-      ref={containerRef}
-      className={containerClassName}
-      style={{ overflow: "hidden", ...(containerStyle || {}) }}
-    >
-      <span
-        className={`inline-block ${textClassName}`}
-        style={{
+  return createElement(
+    asTag,
+    {
+      ref: containerRef,
+      className: containerClassName,
+      style: { overflow: "hidden", ...(containerStyle || {}) },
+    },
+    createElement(
+      "span",
+      {
+        className: `inline-block ${textClassName}`,
+        style: {
           display: "inline-block",
           lineHeight: 1.2,
           ...(textStyle || {}),
-        }}
-      >
-        {splitText}
-      </span>
-    </Tag>
+        },
+      },
+      splitText
+    )
   );
 };
 

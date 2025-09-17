@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Tiny typing animation for each line
 function TypeLine({ text, delay = 0 }) {
   const [shown, setShown] = useState(0);
   useEffect(() => {

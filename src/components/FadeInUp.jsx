@@ -1,11 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-
-/**
- * FadeInUp wrapper that animates children when it enters the viewport.
- * - Uses IntersectionObserver
- * - Respects prefers-reduced-motion
- * - Supports delay (ms) and once toggling
- */
 export default function FadeInUp({
   as = "div",
   children,
@@ -22,7 +15,6 @@ export default function FadeInUp({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Reduced motion: show immediately without animation
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia &&

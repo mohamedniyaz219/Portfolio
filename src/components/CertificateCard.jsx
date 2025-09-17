@@ -15,7 +15,6 @@ export default function CertificateCard({
       aria-label={`${title} by ${issuer}, issued ${year}`}
     >
       <div className="cert-card__inner">
-        {/* FRONT */}
         <div className="cert-card__face cert-card__front">
           <div className="cert-media">
             {image ? (
@@ -31,7 +30,6 @@ export default function CertificateCard({
           </div>
         </div>
 
-        {/* BACK */}
         <div className="cert-card__face cert-card__back">
           <div className="cert-back__content">
             <div className="cert-title">{title}</div>

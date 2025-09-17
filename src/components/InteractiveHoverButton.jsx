@@ -1,11 +1,4 @@
 import React, { useCallback, useRef } from "react";
-
-/**
- * InteractiveHoverButton
- * - Mouse-follow glow using CSS variables
- * - Variant: primary | outline
- * - Renders <a> if href is provided; otherwise <button>
- */
 export default function InteractiveHoverButton({
   text,
   children,

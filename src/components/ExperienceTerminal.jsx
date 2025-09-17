@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 export default function ExperienceTerminal({ open, onClose, exp }) {
   const overlayRef = useRef(null);
@@ -15,7 +15,6 @@ export default function ExperienceTerminal({ open, onClose, exp }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [show, onClose]);
 
-  // Control mount/unmount to allow exit animations (unmount on animation complete)
   useEffect(() => {
     if (open) {
       setShow(true);
@@ -23,9 +22,8 @@ export default function ExperienceTerminal({ open, onClose, exp }) {
     } else if (show) {
       setClosing(true);
     }
-  }, [open]);
+  }, [open, show]);
 
-  // Lock scroll while visible (including during closing)
   useEffect(() => {
     if (!show) return;
     const prev = document.body.style.overflow;
@@ -48,14 +46,13 @@ export default function ExperienceTerminal({ open, onClose, exp }) {
       aria-modal="true"
       aria-label="Experience details"
     >
-      <motion.div
+      <Motion.div
         className="modal-panel"
         onMouseDown={(e) => e.stopPropagation()}
         initial={{ scale: 0.9, y: 16, opacity: 0 }}
         animate={
           closing
             ? {
-                // Bouncy exit: slight up then down and fade
                 scale: [1, 1.03, 0.9],
                 y: [0, -4, 12],
                 opacity: [1, 1, 0],
@@ -104,7 +101,7 @@ export default function ExperienceTerminal({ open, onClose, exp }) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </Motion.div>
     </div>
   );
 }

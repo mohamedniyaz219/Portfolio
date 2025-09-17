@@ -1,19 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-
-/**
- * LogoLoop - Infinite marquee of logos/icons.
- * Props:
- * - logos: Array of { node?: ReactNode, src?: string, alt?: string, title?: string, href?: string }
- * - speed: number (pixels/second), default 100
- * - direction: 'left' | 'right', default 'left'
- * - logoHeight: number (px), default 36
- * - gap: number (px), default 32
- * - pauseOnHover: boolean, default false
- * - scaleOnHover: boolean, default false
- * - fadeOut: boolean, default false
- * - fadeOutColor: string, default 'var(--color-bg)'
- * - ariaLabel: string, accessibility label for the loop
- */
 export default function LogoLoop({
   logos = [],
   speed = 100,
