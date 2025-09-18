@@ -2,6 +2,7 @@
 
 This is the repository for my personal portfolio website, built with React and Vite. It showcases my skills, projects, and professional experience as a software engineering student.
 
+Live link:https://www.mohamedniyaz.me/
 ## Description
 
 This project is a single-page application designed to be a comprehensive and interactive showcase of my work. It features a clean and modern design with smooth animations and transitions. The portfolio is built to be easily configurable and extensible for future updates.
