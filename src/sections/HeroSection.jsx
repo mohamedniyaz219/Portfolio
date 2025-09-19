@@ -117,7 +117,7 @@ export default function HeroSection() {
           </FadeInUp>
           <FadeInUp delay={950}>
             <InteractiveHoverButton
-              href="https://drive.google.com/file/d/1lG2rVEfW0l1N9ce0yyXJZqyEzft7Pfzi/view?usp=sharing"
+              href="https://drive.google.com/file/d/1swrM3DdHYX3GPnFjdjaTSmLYGJBCkMhi/view?usp=sharing"
               variant="outline"
               target="_blank"
               rel="noopener noreferrer"
