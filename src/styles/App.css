@@ -255,7 +255,7 @@ html { scroll-behavior: smooth; }
   justify-content: center;
   gap: .5rem;
   padding: .75rem 1.1rem;
-  border-radius: 10px;
+  border-radius: 50px;
   font-weight: 600;
   font-size: 0.95rem;
   line-height: 1;
