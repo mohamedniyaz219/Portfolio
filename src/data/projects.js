@@ -18,6 +18,7 @@ export const projects = [
     title: "SnapTap",
     desc: "A Multi-tenant RBAC application for institures, parents, students and merchants to spend smart within the campus.",
     tags: ["React", "Express", "Node.js", "PostgreSQL", "Python"],
+    demo: "https://www.snaptap.ifelsetech.com/",
     image: `${import.meta.env.BASE_URL}snaptap.jpeg`,
   },
 ];
