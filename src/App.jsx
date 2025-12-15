@@ -84,6 +84,13 @@ function App() {
 
   const experiences = [
     {
+      company: "E16AI XR Technology",
+      duration: "November 2025",
+      role: "ML Engineer Intern",
+      description:
+        "Built an optimized Machine Learning Model which can accurately detect Digital Electrical Meter Readings from images using a fine tuned Teseract OCR Model with Python",
+    },
+    {
       company: "Ifelse Technologies",
       duration: "July 2025 - September 2025",
       role: "Full‑Stack Developer Intern with AI/ML integration",
