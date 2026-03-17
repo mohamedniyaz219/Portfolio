@@ -1,5 +1,12 @@
 export const projects = [
   {
+    title: "Survailance.io",
+    desc: "RBAC Crowd anomaly detection system using computer vision and machine learning with multitenant support. Detects anomalies in real time video feeds and sends alerts to Responders/Admin in both web and mobile applications. Built with React, Express, Node.js, PostgreSQL, Python and Yolo.",
+    tags: ["React", "Express", "JavaScript", "Node.js", "PostgreSQL", "Python", "Yolo"],
+    code: "https://github.com/mohamedniyaz219/Survailance-Sysytem",
+    image: `${import.meta.env.BASE_URL}survaillance.jpeg`,
+  },
+  {
     title: "SpaceDive",
     desc: "Frontend project which fetches real time data of position of asteroids using NASA public API and displays them in a 3D visualization and their relative positon.",
     tags: ["HTML", "CSS", "JavaScript"],

@@ -84,6 +84,13 @@ function App() {
 
   const experiences = [
     {
+      company: "Ifelse Technologies",
+      duration: "Jan 2026 - Present",
+      role: "Full‑Stack Developer Intern with AI/ML integration",
+      description:
+        "Working on multi-tenant RBAC SaaS application with realtime users. React, Node.js/Express.js, and PostgreSQL."
+    },
+    {
       company: "E16AI XR Technology",
       duration: "November 2025",
       role: "ML Engineer Intern",
